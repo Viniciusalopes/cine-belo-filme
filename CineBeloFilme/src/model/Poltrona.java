@@ -2,6 +2,7 @@ package model;
 
 public class Poltrona {
 	// Atributos
+	
 	private int id;
 	private char fileira;
 	private int numero;
