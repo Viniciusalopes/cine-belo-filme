@@ -1,6 +1,7 @@
 package model;
 
 public class Poltrona {
+	
 	// Atributos
 	
 	private int id;
