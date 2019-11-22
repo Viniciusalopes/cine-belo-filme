@@ -7,6 +7,7 @@ package model;
 
 /**
  *
+<<<<<<< HEAD
  * @author vovostudio
  */
 public class Filme {
@@ -29,4 +30,10 @@ public class Filme {
     public String getTitulo() {
         return titulo;
     }
+=======
+ * @author Gustavo
+ */
+class Filme {
+    
+>>>>>>> 5ae39c444a3ac9d5c1d18f4dc2517914ce580885
 }
