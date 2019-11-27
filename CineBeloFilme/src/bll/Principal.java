@@ -5,6 +5,11 @@
  */
 package bll;
 
+import app.JFrameAcesso;
+import app.JFrameCinema;
+import javax.swing.JOptionPane;
+import model.Usuario;
+
 /**
  *
  * @author vovostudio
@@ -15,7 +20,12 @@ public class Principal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        frameAcesso();
     }
-    
+
+    public static void frameAcesso() {
+        JFrameAcesso acesso = new JFrameAcesso(null);
+        acesso.setLocationRelativeTo(null);
+        acesso.setVisible(true);
+    }
 }

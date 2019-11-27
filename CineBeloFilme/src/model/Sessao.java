@@ -5,29 +5,25 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
- * @author Gustavo
+ * @author vovostudio
  */
-
-    import java.util.List;
-
 public class Sessao {
- // Atributos   
+
     private int id;
     private String periodo;
-    private Filme filme;
     private Poltrona[][] poltronas;
-    
-    //construtor
+    private Filme filme;
 
-    public Sessao(int id, String periodo, Filme filme, Poltrona[][] poltronas) {
+    public Sessao(int id, String periodo, Poltrona[][] poltronas, Filme filme) {
         this.id = id;
         this.periodo = periodo;
-        this.filme = filme;
         this.poltronas = poltronas;
+        this.filme = filme;
     }
-    // metodos 
 
     public int getId() {
         return id;
@@ -37,12 +33,11 @@ public class Sessao {
         return periodo;
     }
 
-    public Filme getFilme() {
-        return filme;
-    }
-
     public Poltrona[][] getPoltronas() {
         return poltronas;
     }
-    
+
+    public Filme getFilme() {
+        return filme;
+    }
 }
