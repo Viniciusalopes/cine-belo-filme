@@ -6,9 +6,6 @@
 package bll;
 
 import app.JFrameAcesso;
-import app.JFrameCinema;
-import javax.swing.JOptionPane;
-import model.Usuario;
 
 /**
  *
@@ -16,6 +13,7 @@ import model.Usuario;
  */
 public class Principal {
 
+    public static JFrameAcesso acesso;
     /**
      * @param args the command line arguments
      */
@@ -27,5 +25,6 @@ public class Principal {
         JFrameAcesso acesso = new JFrameAcesso(null);
         acesso.setLocationRelativeTo(null);
         acesso.setVisible(true);
+        
     }
 }

@@ -1077,6 +1077,7 @@ public class JFrameCinema extends javax.swing.JFrame {
         jButtonVerIngresso = new javax.swing.JButton();
         jButtonDevolver = new javax.swing.JButton();
         jLabelStatus = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanelRelatorio = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableRelatorio = new javax.swing.JTable();
@@ -1084,6 +1085,14 @@ public class JFrameCinema extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cine Belo Filme");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -2192,6 +2201,13 @@ public class JFrameCinema extends javax.swing.JFrame {
 
         jLabelStatus.setText("jLabelStatus");
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelDetalhesLayout = new javax.swing.GroupLayout(jPanelDetalhes);
         jPanelDetalhes.setLayout(jPanelDetalhesLayout);
         jPanelDetalhesLayout.setHorizontalGroup(
@@ -2200,22 +2216,29 @@ public class JFrameCinema extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelDetalhesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelDetalhesLayout.createSequentialGroup()
-                        .addComponent(jButtonVender)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonVerIngresso)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonDevolver))
+                        .addGroup(jPanelDetalhesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelDetalhesLayout.createSequentialGroup()
+                                .addComponent(jButtonVender)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonVerIngresso)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonDevolver))
+                            .addGroup(jPanelDetalhesLayout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(jLabelStatus)))
+                        .addContainerGap(173, Short.MAX_VALUE))
                     .addGroup(jPanelDetalhesLayout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabelPreco))
-                    .addGroup(jPanelDetalhesLayout.createSequentialGroup()
-                        .addComponent(jRadioButtonInteira)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButtonMeia))
-                    .addGroup(jPanelDetalhesLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabelStatus)))
-                .addContainerGap(173, Short.MAX_VALUE))
+                        .addGroup(jPanelDetalhesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelDetalhesLayout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(jLabelPreco))
+                            .addGroup(jPanelDetalhesLayout.createSequentialGroup()
+                                .addComponent(jRadioButtonInteira)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonMeia)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18))))
         );
         jPanelDetalhesLayout.setVerticalGroup(
             jPanelDetalhesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2223,11 +2246,14 @@ public class JFrameCinema extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addComponent(jLabelStatus)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelDetalhesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButtonInteira)
-                    .addComponent(jRadioButtonMeia))
-                .addGap(12, 12, 12)
-                .addComponent(jLabelPreco)
+                .addGroup(jPanelDetalhesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelDetalhesLayout.createSequentialGroup()
+                        .addGroup(jPanelDetalhesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButtonInteira)
+                            .addComponent(jRadioButtonMeia))
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabelPreco))
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelDetalhesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonVender)
@@ -2378,6 +2404,22 @@ public class JFrameCinema extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonInteiraActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        JOptionPane.showMessageDialog(null, "Opa");
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        JOptionPane.showMessageDialog(null, "opa");
+        
+        
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JFrameAcesso acesso = new JFrameAcesso(bll);
+        acesso.setLocationRelativeTo(null);
+        acesso.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2424,6 +2466,7 @@ public class JFrameCinema extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroupFilmes;
     private javax.swing.ButtonGroup buttonGroupLugares;
     private javax.swing.ButtonGroup buttonGroupMeia;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonDevolver;
     private javax.swing.JButton jButtonVender;
     private javax.swing.JButton jButtonVerIngresso;

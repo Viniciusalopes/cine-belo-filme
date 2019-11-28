@@ -67,7 +67,6 @@ public class jFrameCpf extends javax.swing.JFrame {
         JFrameCinema cine = new JFrameCinema(this.usuario, this.bll);
         cine.setLocationRelativeTo(null);
         cine.setVisible(true);
-        this.dispose();
     }
 
     /**

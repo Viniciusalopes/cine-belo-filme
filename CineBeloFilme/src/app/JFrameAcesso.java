@@ -30,16 +30,15 @@ public class JFrameAcesso extends javax.swing.JFrame {
     }
 
     public void novoLogin(Bll bll) {
-        JFrameAcesso novo = new JFrameAcesso(bll);
-        novo.setLocationRelativeTo(null);
-        novo.setVisible(true);
+        setBll(bll);
+        this.setVisible(true);
     }
 
     private void frameCpf(String tipo) {
         jFrameCpf auth = new jFrameCpf(tipo, this.bll);
         auth.setLocationRelativeTo(null);
         auth.setVisible(true);
-        this.dispose();
+        this.setVisible(false);
     }
 
     /**
