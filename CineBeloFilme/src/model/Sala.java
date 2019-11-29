@@ -5,10 +5,33 @@
  */
 package model;
 
+import java.util.List;
+
 /**
  *
- * @author Gustavo
+ * @author vovostudio
  */
-class Sala {
-    
+public class Sala {
+
+    private int id;
+    private String nome;
+    private List<Sessao> sessoes;
+
+    public Sala(int id, String nome, List<Sessao> sessoes) {
+        this.id = id;
+        this.nome = nome;
+        this.sessoes = sessoes;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public List<Sessao> getSessoes() {
+        return sessoes;
+    }
 }

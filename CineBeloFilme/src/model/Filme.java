@@ -5,19 +5,20 @@
  */
 package model;
 
+/**
+ *
+ * @author vovostudio
+ */
 public class Filme {
 
-    // Atributos
     private int id;
     private String titulo;
 
-    // Construtor
     public Filme(int id, String titulo) {
         this.id = id;
         this.titulo = titulo;
     }
 
-    // Métodos públicos
     public int getId() {
         return id;
     }

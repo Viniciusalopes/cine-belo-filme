@@ -1,5 +1,9 @@
 /CineBeloFilme/nbproject/
 CineBeloFilme/build.xml
 CineBeloFilme/manifest.mf
+<<<<<<< HEAD
+/CineBeloFilme/build/
+=======
 CineBeloFilme/.classpath
 CineBeloFilme/.project
+>>>>>>> 05b2ab742c4b37fa9610aaf60a7fa43cd95a820b
