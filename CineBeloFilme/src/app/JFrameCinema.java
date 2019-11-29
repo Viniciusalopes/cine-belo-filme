@@ -12,7 +12,6 @@ import java.util.List;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
-import sun.swing.table.DefaultTableCellHeaderRenderer;
 import bll.Bll;
 import javax.swing.JOptionPane;
 import model.Entrada;
@@ -229,9 +228,9 @@ public class JFrameCinema extends javax.swing.JFrame {
          *
          * FONTE: https://www.guj.com.br//t/alinhamento-de-colunas-no-jtable/225200/2
          */
-//        DefaultTableCellRenderer esquerda = new DefaultTableCellHeaderRenderer();
-        DefaultTableCellRenderer centralizado = new DefaultTableCellHeaderRenderer();
-        DefaultTableCellRenderer direita = new DefaultTableCellHeaderRenderer();
+//        DefaultTableCellRenderer esquerda = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer direita = new DefaultTableCellRenderer();
 
 //        esquerda.setHorizontalAlignment(SwingConstants.LEFT);
         centralizado.setHorizontalAlignment(SwingConstants.CENTER);
