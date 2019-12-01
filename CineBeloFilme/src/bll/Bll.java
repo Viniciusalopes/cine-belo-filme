@@ -157,7 +157,8 @@ public class Bll {
         for (int i = 0; i < totais.length - 1; i++) {
             if (i == 0) {
                 idMaiorA = idMenorA = idMaiorB = idMenorB = filmes.get(i).getId();
-                maiorA = menorA = maiorB = menorB = totais[i][4];
+                maiorA = menorA = totais[i][5];
+                maiorB = menorB = totais[i][4];
             } else {
                 // Maior Arrecadação
                 if (totais[i][5] > maiorA) {
@@ -242,6 +243,9 @@ public class Bll {
 
         for (Sala sl : cinema.getSalas()) {
             for (Sessao ss : sl.getSessoes()) {
+                // Quantidade aleatória para testes de relatório
+                quantidade = sorteia(quantidade, quantidade + 10);
+                
                 sorteados = sorteiaDiferentes(quantidade, 0, 99);
                 for (int i = 0; i < quantidade; i++) {
                     meia = (sorteia(0, 1) == 0) ? false : true;

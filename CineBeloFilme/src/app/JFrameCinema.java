@@ -344,6 +344,27 @@ public class JFrameCinema extends javax.swing.JFrame {
         relatorio[10][6] = Integer.toString(idMenorB);
         relatorio[10][7] = String.format("%.0f", menorB);
          */
+        this.jLabelMaiorArrecadacao.setText(
+                getTxtLabelMaiorMenor(
+                        relatorio[relatorio.length - 1][0], relatorio[relatorio.length - 1][1], "R$ %s"));
+        
+        this.jLabelMenorArrecadacao.setText(
+                getTxtLabelMaiorMenor(
+                        relatorio[relatorio.length - 1][2], relatorio[relatorio.length - 1][3], "R$ %s"));
+        
+        this.jLabelMaiorBilheteria.setText(
+                getTxtLabelMaiorMenor(
+                        relatorio[relatorio.length - 1][4], relatorio[relatorio.length - 1][5], "%s unidades"));
+        
+        this.jLabelMenorBilheteria.setText(
+                getTxtLabelMaiorMenor(
+                        relatorio[relatorio.length - 1][6], relatorio[relatorio.length - 1][7], "%s unidades"));
+    }
+
+    private String getTxtLabelMaiorMenor(String id, String valor, String formato) {
+        int filme_id = Integer.parseInt(id);
+        String titulo = bll.getFilme(filme_id).getTitulo();
+        return String.format("%04d - %s, com " + formato, filme_id, titulo, valor);
     }
 
     private void formataTabela() {
@@ -2922,7 +2943,7 @@ public class JFrameCinema extends javax.swing.JFrame {
             jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRelatorioLayout.createSequentialGroup()
                 .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1152, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1158, Short.MAX_VALUE)
                     .addGroup(jPanelRelatorioLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2933,22 +2954,21 @@ public class JFrameCinema extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelTotalInteira)
-                            .addGroup(jPanelRelatorioLayout.createSequentialGroup()
-                                .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelTotalMeia)
-                                    .addComponent(jLabelTotalGeral))
-                                .addGap(139, 139, 139)
-                                .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelMaiorArrecadacao)
-                                    .addComponent(jLabelMenorArrecadacao)
-                                    .addComponent(jLabelMaiorBilheteria)
-                                    .addComponent(jLabelMenorBilheteria))))))
+                            .addComponent(jLabelTotalMeia)
+                            .addComponent(jLabelTotalGeral))
+                        .addGap(198, 198, 198)
+                        .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelMaiorArrecadacao)
+                            .addComponent(jLabelMenorArrecadacao)
+                            .addComponent(jLabelMaiorBilheteria)
+                            .addComponent(jLabelMenorBilheteria))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelRelatorioLayout.createSequentialGroup()
@@ -2961,34 +2981,37 @@ public class JFrameCinema extends javax.swing.JFrame {
             .addGroup(jPanelRelatorioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabelTotalMeia)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabelMaiorArrecadacao, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabelTotalInteira)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabelMenorArrecadacao))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabelMaiorBilheteria))
-                .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(42, 42, 42)
+                .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelRelatorioLayout.createSequentialGroup()
-                        .addGap(14, 14, 14)
+                        .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabelTotalMeia))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabelTotalInteira))
+                        .addGap(47, 47, 47)
                         .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jLabelTotalGeral)))
                     .addGroup(jPanelRelatorioLayout.createSequentialGroup()
+                        .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabelMaiorBilheteria))
                         .addGap(18, 18, 18)
                         .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jLabelMenorBilheteria))))
-                .addGap(255, 255, 255))
+                            .addComponent(jLabelMenorBilheteria))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabelMaiorArrecadacao, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabelMenorArrecadacao))))
+                .addGap(259, 259, 259))
             .addGroup(jPanelRelatorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelRelatorioLayout.createSequentialGroup()
                     .addGap(208, 208, 208)
