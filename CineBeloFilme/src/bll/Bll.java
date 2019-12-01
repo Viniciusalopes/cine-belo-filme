@@ -114,7 +114,7 @@ public class Bll {
     }
 
     public String[][] getRelatorio() {
-        String[][] ret = new String[10][9];
+        String[][] ret = new String[11][9];
         List<Entrada> entradas = getEntradas();
         List<Filme> filmes = getFilmes();
         double[][] totais = new double[10][6];
@@ -122,11 +122,14 @@ public class Bll {
         Entrada entrada;
         Sessao sessao;
         int filme_id;
-        int filme_idMaisIngressos = 0;
-        double qtdFilmeMaisIngressos = 0.0;
+
+        // A = Arrecadação; B = Bilheteria
+        int idMaiorA, idMenorA, idMaiorB, idMenorB;
+        double maiorA, menorA, maiorB, menorB;
+        idMaiorA = idMenorA = idMaiorB = idMenorB = 0;
+        maiorA = menorA = maiorB = menorB = 0.0;
         ///
-        
-        
+
         for (int i = 0; i < filmes.size(); i++) {
             filme_id = filmes.get(i).getId();
 
@@ -151,14 +154,30 @@ public class Bll {
             }
         }
 
-        for (int i = 0; i < totais.length; i++) {
+        for (int i = 0; i < totais.length - 1; i++) {
             if (i == 0) {
-                filme_idMaisIngressos = filmes.get(i).getId();
-                qtdFilmeMaisIngressos = totais[i][4];
+                idMaiorA = idMenorA = idMaiorB = idMenorB = filmes.get(i).getId();
+                maiorA = menorA = maiorB = menorB = totais[i][4];
             } else {
-                if (totais[i][4] > qtdFilmeMaisIngressos) {
-                    filme_idMaisIngressos = filmes.get(i).getId();
-                    qtdFilmeMaisIngressos = totais[i][4];
+                // Maior Arrecadação
+                if (totais[i][5] > maiorA) {
+                    idMaiorA = cinema.getFilmes().get(i).getId();
+                    maiorA = totais[i][5];
+                }
+                // Menor Arrecadação
+                if (totais[i][5] < menorA) {
+                    idMenorA = cinema.getFilmes().get(i).getId();
+                    menorA = totais[i][5];
+                }
+                // Maior Bilheteria
+                if (totais[i][4] > maiorB) {
+                    idMaiorB = cinema.getFilmes().get(i).getId();
+                    maiorB = totais[i][4];
+                }
+                // Menor Bilheteria
+                if (totais[i][4] < menorB) {
+                    idMenorB = cinema.getFilmes().get(i).getId();
+                    menorB = totais[i][4];
                 }
             }
         }
@@ -184,12 +203,21 @@ public class Bll {
         }
         for (int i = 0; i < totais.length; i++) {
             ret[9][3] = String.format("%.0f", totalGeral[0]);
-            ret[9][4] = String.format("%.2f", totalGeral[1]).replace(",", ".");
+            ret[9][4] = String.format("%.2f", totalGeral[1]);
             ret[9][5] = String.format("%.0f", totalGeral[2]);
             ret[9][6] = String.format("%.2f", totalGeral[3]);
             ret[9][7] = String.format("%.0f", totalGeral[4]);
             ret[9][8] = String.format("%.2f", totalGeral[5]);
         }
+
+        ret[10][0] = Integer.toString(idMaiorA);
+        ret[10][1] = String.format("%.2f", maiorA);
+        ret[10][2] = Integer.toString(idMenorA);
+        ret[10][3] = String.format("%.2f", menorA);
+        ret[10][4] = Integer.toString(idMaiorB);
+        ret[10][5] = String.format("%.0f", maiorB);
+        ret[10][6] = Integer.toString(idMenorB);
+        ret[10][7] = String.format("%.0f", menorB);
 
         return ret;
     }

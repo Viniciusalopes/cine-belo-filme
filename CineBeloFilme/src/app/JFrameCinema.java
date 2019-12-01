@@ -309,7 +309,7 @@ public class JFrameCinema extends javax.swing.JFrame {
     private void preencheTabela() {
         String[][] relatorio = bll.getRelatorio();
         if (relatorio != null) {
-            for (int i = 0; i < relatorio.length - 1; i++) {
+            for (int i = 0; i < relatorio.length - 2; i++) {
                 for (int j = 0; j < relatorio[i].length; j++) {
                     this.jTableRelatorio.setValueAt(relatorio[i][j], i, j);
                 }
@@ -321,18 +321,29 @@ public class JFrameCinema extends javax.swing.JFrame {
     private void setLabelsTotal(String[][] relatorio) {
         this.jLabelTotalMeia.setText(String.format(
                 "R$ %.2f (%s unidades)",
-                Double.parseDouble(relatorio[relatorio.length - 1][4].replace(",", ".")),
+                Double.parseDouble(relatorio[relatorio.length - 2][4].replace(",", ".")),
                 relatorio[relatorio.length - 1][3]));
 
         this.jLabelTotalInteira.setText(String.format(
                 "R$ %.2f (%s unidades)",
-                Double.parseDouble(relatorio[relatorio.length - 1][6].replace(",", ".")),
+                Double.parseDouble(relatorio[relatorio.length - 2][6].replace(",", ".")),
                 relatorio[relatorio.length - 1][5]));
 
         this.jLabelTotalGeral.setText(String.format(
                 "R$ %.2f (%s unidades)",
-                Double.parseDouble(relatorio[relatorio.length - 1][8].replace(",", ".")),
+                Double.parseDouble(relatorio[relatorio.length - 2][8].replace(",", ".")),
                 relatorio[relatorio.length - 1][7]));
+
+        /*
+        relatorio[10][0] = Integer.toString(idMaiorA);
+        relatorio[10][1] = String.format("%.2f", maiorA);
+        relatorio[10][2] = Integer.toString(idMenorA);
+        relatorio[10][3] = String.format("%.2f", menorA);
+        relatorio[10][4] = Integer.toString(idMaiorB);
+        relatorio[10][5] = String.format("%.0f", maiorB);
+        relatorio[10][6] = Integer.toString(idMenorB);
+        relatorio[10][7] = String.format("%.0f", menorB);
+         */
     }
 
     private void formataTabela() {
