@@ -237,14 +237,15 @@ public class Bll {
         cinema.excluirEntrada(entrada_id);
     }
 
-    private void ocupacao_inicial(int quantidade) {
+    private void ocupacao_inicial(int minimo) {
         int[] sorteados;
+        int quantidade;
         boolean meia;
 
         for (Sala sl : cinema.getSalas()) {
             for (Sessao ss : sl.getSessoes()) {
                 // Quantidade aleatória para testes de relatório
-                quantidade = sorteia(quantidade, quantidade + 10);
+                quantidade = sorteia(minimo, minimo + 10);
                 
                 sorteados = sorteiaDiferentes(quantidade, 0, 99);
                 for (int i = 0; i < quantidade; i++) {
