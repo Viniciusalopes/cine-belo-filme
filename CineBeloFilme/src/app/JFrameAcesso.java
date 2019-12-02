@@ -1,7 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ---------------------------------------------------------------------------------------
+ * Licença   : MIT - Copyright 2019 Viniciusalopes (Vovolinux) <suporte@vovolinux.com.br>
+ *             <https://opensource.org/licenses/MIT>
+ * ---------------------------------------------------------------------------------------
+ * Criado em : novembro de 2019
+ * ---------------------------------------------------------------------------------------
+ * Projeto   : Projeto Integrador - Cine ABC
+ * ---------------------------------------------------------------------------------------
+ * Alunos    : Gustavo Henrique Ribeiro Martins
+ *             Olair Soares de Almeida
+ *             Vinicius Araujo Lopes
+ * ---------------------------------------------------------------------------------------
+ * Finalidade: Tela de seleção do tipo de acesso: Cliente ou Administrador
+ * ---------------------------------------------------------------------------------------
  */
 package app;
 
@@ -20,12 +31,18 @@ public class JFrameAcesso extends javax.swing.JFrame {
      */
     public JFrameAcesso(Bll bll) {
         initComponents();
+        // Cria uma nova instância da bll ou atualiza com a bll passada por parâmetro
         this.bll = (bll == null) ? new Bll() : bll;
     }
 
+    /**
+     * Executa o frameCpf para autenticação
+     *
+     * @param tipo "cliente": exibe campo para cpf; "admin": exibe campo para senha;
+     */
     private void frameCpf(String tipo) {
         jFrameCpf auth = new jFrameCpf(tipo, this.bll);
-        auth.setLocationRelativeTo(null);
+        auth.setLocationRelativeTo(null);   // Exibe no centro da tela
         auth.setVisible(true);
         this.dispose();
     }
@@ -103,10 +120,12 @@ public class JFrameAcesso extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteActionPerformed
+        // Executa frameCpf com campo para cpf
         frameCpf("cliente");
     }//GEN-LAST:event_jButtonClienteActionPerformed
 
     private void jButtonAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdminActionPerformed
+        // Executa frameCpf com campo para senha
         frameCpf("admin");
     }//GEN-LAST:event_jButtonAdminActionPerformed
 
