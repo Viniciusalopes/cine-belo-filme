@@ -1,7 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ---------------------------------------------------------------------------------------
+ * Licença   : MIT - Copyright 2019 Viniciusalopes (Vovolinux) <suporte@vovolinux.com.br>
+ *             <https://opensource.org/licenses/MIT>
+ * ---------------------------------------------------------------------------------------
+ * Criado em : novembro de 2019
+ * ---------------------------------------------------------------------------------------
+ * Projeto   : Projeto Integrador - Cine ABC
+ * ---------------------------------------------------------------------------------------
+ * Alunos    : Gustavo Henrique Ribeiro Martins
+ *             Olair Soares de Almeida
+ *             Vinicius Araujo Lopes
+ * ---------------------------------------------------------------------------------------
+ * Finalidade: Tela de autenticação de acesso por cpf ou senha
+ * ---------------------------------------------------------------------------------------
  */
 package app;
 
@@ -28,12 +39,21 @@ public class jFrameCpf extends javax.swing.JFrame {
         exibeCampos();
     }
 
+    /**
+     * Atualiza o bll e cria um novo Usuario.
+     *
+     * @param tipo "cliente" ou "admin"
+     * @param bll Dados inicializados ou recebidos no JFrameAcesso
+     */
     private void setValoresIniciais(String tipo, Bll bll) {
         this.bll = bll;
         this.usuario = new Usuario();
         this.usuario.setTipo(tipo);
     }
 
+    /**
+     * Alterna os campos de Cpf e de Senha de acordo com o tipo de cliente.
+     */
     private void exibeCampos() {
         boolean cliente = (this.usuario.getTipo().equals("cliente")) ? true : false;
         this.jLabelCpf.setVisible(cliente);
@@ -42,11 +62,17 @@ public class jFrameCpf extends javax.swing.JFrame {
         this.jPasswordField.setVisible(!cliente);
     }
 
+    /**
+     * Volta para a seleção de tipo de usuário.
+     */
     private void voltar() {
         Principal.frameAcesso();
         this.dispose();
     }
 
+    /**
+     * Valida o texto do cpf ou a senha do admin
+     */
     private void validar() {
         if (this.usuario.getTipo().equals("admin")) {
             if (bll.usuarioValido(this.usuario.getTipo(),
@@ -65,6 +91,9 @@ public class jFrameCpf extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Exibe o jFrame principal com os filmes disponíveis para a seleção.
+     */
     private void jFrameCinema() {
         JFrameCinema cine = new JFrameCinema(this.usuario, this.bll);
         cine.setLocationRelativeTo(null);
