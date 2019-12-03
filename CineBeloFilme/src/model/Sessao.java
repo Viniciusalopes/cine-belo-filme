@@ -1,23 +1,30 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ---------------------------------------------------------------------------------------
+ * Licença   : MIT - Copyright 2019 Viniciusalopes (Vovolinux) <suporte@vovolinux.com.br>
+ *             <https://opensource.org/licenses/MIT>
+ * ---------------------------------------------------------------------------------------
+ * Criado em : novembro de 2019
+ * ---------------------------------------------------------------------------------------
+ * Projeto   : Projeto Integrador - Cine ABC
+ * ---------------------------------------------------------------------------------------
+ * Alunos    : Gustavo Henrique Ribeiro Martins
+ *             Olair Soares de Almeida
+ *             Vinicius Araujo Lopes
+ * ---------------------------------------------------------------------------------------
+ * Finalidade: Modelo de objeto da classe Sessao
+ * ---------------------------------------------------------------------------------------
  */
 package model;
 
-import java.util.Date;
-
-/**
- *
- * @author vovostudio
- */
 public class Sessao {
 
+    // Atributos
     private int id;
     private String periodo;
     private Poltrona[][] poltronas;
     private Filme filme;
 
+    // Construtor
     public Sessao(int id, String periodo, Poltrona[][] poltronas, Filme filme) {
         this.id = id;
         this.periodo = periodo;
@@ -25,6 +32,7 @@ public class Sessao {
         this.filme = filme;
     }
 
+    // Get
     public int getId() {
         return id;
     }
