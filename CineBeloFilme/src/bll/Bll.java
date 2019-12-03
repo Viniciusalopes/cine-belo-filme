@@ -1,7 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ---------------------------------------------------------------------------------------
+ * Licença   : MIT - Copyright 2019 Viniciusalopes (Vovolinux) <suporte@vovolinux.com.br>
+ *             <https://opensource.org/licenses/MIT>
+ * ---------------------------------------------------------------------------------------
+ * Criado em : novembro de 2019
+ * ---------------------------------------------------------------------------------------
+ * Projeto   : Projeto Integrador - Cine ABC
+ * ---------------------------------------------------------------------------------------
+ * Alunos    : Gustavo Henrique Ribeiro Martins
+ *             Olair Soares de Almeida
+ *             Vinicius Araujo Lopes
+ * ---------------------------------------------------------------------------------------
+ * Finalidade: Regras de negócio(Bll) e comunicação da interface(App) com os dados (Dao).
+ * ---------------------------------------------------------------------------------------
  */
 package bll;
 
@@ -16,21 +27,20 @@ import model.Sessao;
 import model.Usuario;
 import static util.Util.sorteia;
 
-/**
- *
- * @author vovostudio
- */
 public class Bll {
 
+    // Variáveis
     private Dao dao;
     private Cinema cinema;
 
+    // Construtor
     public Bll() {
         dao = new Dao();
         cinema = dao.getCinema();
         ocupacao_inicial(cinema.getOcupacao_inicial());
     }
 
+    // Get
     public List<Sala> getSalas() {
         return cinema.getSalas();
     }
@@ -39,6 +49,25 @@ public class Bll {
         return cinema.getFilmes();
     }
 
+    public List<Entrada> getEntradas() {
+        return cinema.getEntradas();
+    }
+
+    /**
+     * Preço da entrada carregado na Dao;
+     *
+     * @return Valor double
+     */
+    public double getPreco_entrada() {
+        return cinema.getPreco_entrada();
+    }
+
+    /**
+     * Filme da lista de filmes.
+     *
+     * @param filme_id ID do filme
+     * @return Instância do objeto filme com o mesmo filme_id
+     */
     public Filme getFilme(int filme_id) {
         for (Filme f : getFilmes()) {
             if (f.getId() == filme_id) {
@@ -48,6 +77,12 @@ public class Bll {
         return null;
     }
 
+    /**
+     * Sessão do filme.
+     *
+     * @param filme_id ID do filme
+     * @return Objeto Sessao do filme com mesmo filme_id
+     */
     public Sessao getSessaoDoFilme(int filme_id) {
         for (Sala sl : cinema.getSalas()) {
             for (Sessao ss : sl.getSessoes()) {
@@ -59,6 +94,13 @@ public class Bll {
         return null;
     }
 
+    /**
+     * Sala da sessão do filme.
+     *
+     * @param sessao_id ID da sessão
+     * @param filme_id ID do filme
+     * @return
+     */
     public Sala getSalaDaSessao(int sessao_id, int filme_id) {
         for (Sala sl : cinema.getSalas()) {
             for (Sessao ss : sl.getSessoes()) {
@@ -71,6 +113,12 @@ public class Bll {
         return null;
     }
 
+    /**
+     * Poltronas de um filme.
+     *
+     * @param filme_id ID do filme
+     * @return Matriz de objetos Poltrona
+     */
     public Poltrona[][] getPoltronas(int filme_id) {
         for (Sala sl : cinema.getSalas()) {
             for (Sessao ss : sl.getSessoes()) {
@@ -82,12 +130,26 @@ public class Bll {
         return null;
     }
 
+    /**
+     * Texto para identificação da poltrona.
+     *
+     * @param fileira Letras [A~J]
+     * @param poltrona Números [1~10]
+     * @return Label da poltrona
+     */
     public String getLabelPoltrona(int fileira, int poltrona) {
         char letra = 'A';
         letra += fileira;
         return String.format("%s%d", letra, poltrona + 1);
     }
 
+    /**
+     * Texto para identificação da poltrona, pelo id e pelo filme_id
+     *
+     * @param poltrona_id ID da poltrona
+     * @param filme_id ID do filme
+     * @return Label da poltrona
+     */
     public String getLabelPoltrona_id(int poltrona_id, int filme_id) {
         Poltrona[][] poltronas = getPoltronas(filme_id);
         for (int i = 0; i < poltronas.length; i++) {
@@ -100,10 +162,12 @@ public class Bll {
         return null;
     }
 
-    public List<Entrada> getEntradas() {
-        return cinema.getEntradas();
-    }
-
+    /**
+     * Entrada do cinema.
+     *
+     * @param entrada_id ID da entrada
+     * @return Objeto Entrada
+     */
     public Entrada getEntrada(int entrada_id) {
         for (Entrada e : cinema.getEntradas()) {
             if (e.getId() == entrada_id) {
@@ -113,6 +177,11 @@ public class Bll {
         return null;
     }
 
+    /**
+     * Gera o relatório de vendas.
+     *
+     * @return Matriz de Strings para exibição na tabela de relatório e nos totais
+     */
     public String[][] getRelatorio() {
         String[][] ret = new String[11][9];
         List<Entrada> entradas = getEntradas();
@@ -223,20 +292,37 @@ public class Bll {
         return ret;
     }
 
-    public double getPreco_entrada() {
-        return cinema.getPreco_entrada();
-    }
-
+    /**
+     * Inclui uma entrada na lista de entradas do cinema.
+     *
+     * @param filme_id ID do filme da entrada
+     * @param sala_id ID da sala do filme
+     * @param sessao_id ID da sessão do filme
+     * @param poltrona_id ID da poltrona da entrada
+     * @param meia true: meia entrada, false: inteira
+     * @param preco Preço da entrada
+     * @param cpf Cpf do cliente
+     */
     public void incluirEntrada(int filme_id, int sala_id, int sessao_id, int poltrona_id, boolean meia, double preco, String cpf) {
         cinema.incluirEntrada(
                 new Entrada(cinema.getEntrada_id(), filme_id, sala_id, sessao_id, poltrona_id, meia, preco, cpf)
         );
     }
 
+    /**
+     * Exclui uma entrada pelo ID.
+     *
+     * @param entrada_id ID da entrada
+     */
     public void excluirEntrada(int entrada_id) {
         cinema.excluirEntrada(entrada_id);
     }
 
+    /**
+     * Sorteia de 20 a 30 poltronas de cada sessão para a ocupação inicial.
+     *
+     * @param minimo quantidade mínima de ocupação
+     */
     private void ocupacao_inicial(int minimo) {
         int[] sorteados;
         int quantidade;
@@ -244,9 +330,9 @@ public class Bll {
 
         for (Sala sl : cinema.getSalas()) {
             for (Sessao ss : sl.getSessoes()) {
-                // Quantidade aleatória para testes de relatório
+                // Quantidade aleatória para testes de relatório, entre 20 e 30 poltronas
                 quantidade = sorteia(minimo, minimo + 10);
-                
+
                 sorteados = sorteiaDiferentes(quantidade, 0, 99);
                 for (int i = 0; i < quantidade; i++) {
                     meia = (sorteia(0, 1) == 0) ? false : true;
@@ -264,6 +350,14 @@ public class Bll {
         }
     }
 
+    /**
+     * Sorteia números diferentes em um intervalo, sem repetição.
+     *
+     * @param quantidade Quantidade de números sorteados
+     * @param de Valor mínimo para o sorteio
+     * @param ate Valor máximo para o sorteio
+     * @return Vetor[quantidade] com números sorteados
+     */
     private int[] sorteiaDiferentes(int quantidade, int de, int ate) {
         int[] ret = new int[quantidade];
         boolean existe;
@@ -282,6 +376,13 @@ public class Bll {
         return ret;
     }
 
+    /**
+     * Verifica se o usuário é válido.
+     *
+     * @param tipo "cliente" ou "admin"
+     * @param cpfSenha "cpf" para "cliente", "senha" para "admin"
+     * @return true: usuário válido; false: usuário inválido
+     */
     public boolean usuarioValido(String tipo, String cpfSenha) {
         for (Usuario u : cinema.getUsuarios()) {
             if (u.getTipo().equals(tipo) && u.getCpf().equals(cpfSenha)) {
@@ -291,6 +392,12 @@ public class Bll {
         return false;
     }
 
+    /**
+     * Validação simbólida de cpf. Valida apenas se não está em branco.
+     *
+     * @param cpf Número do cpf
+     * @return true: cpf válido; false: cpf inválido.
+     */
     public boolean cpfValido(String cpf) {
         if (cpf.trim().length() == 0) {
             return false;
@@ -298,6 +405,12 @@ public class Bll {
         return true;
     }
 
+    /**
+     * Texto de ajuda para as legendas
+     *
+     * @param mensagem Parâmetro para seleção do texto de ajuda
+     * @return Texto de ajuda da legenda
+     */
     public String getTxtAjuda(String mensagem) {
         switch (mensagem) {
             case "disponivel":
@@ -314,5 +427,4 @@ public class Bll {
                 throw new AssertionError();
         }
     }
-
 }
