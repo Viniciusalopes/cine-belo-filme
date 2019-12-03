@@ -1,17 +1,24 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ---------------------------------------------------------------------------------------
+ * Licença   : MIT - Copyright 2019 Viniciusalopes (Vovolinux) <suporte@vovolinux.com.br>
+ *             <https://opensource.org/licenses/MIT>
+ * ---------------------------------------------------------------------------------------
+ * Criado em : novembro de 2019
+ * ---------------------------------------------------------------------------------------
+ * Projeto   : Projeto Integrador - Cine ABC
+ * ---------------------------------------------------------------------------------------
+ * Alunos    : Gustavo Henrique Ribeiro Martins
+ *             Olair Soares de Almeida
+ *             Vinicius Araujo Lopes
+ * ---------------------------------------------------------------------------------------
+ * Finalidade: Modelo de objeto da classe Cinema
+ * ---------------------------------------------------------------------------------------
  */
 package model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author vovostudio
- */
 public class Cinema {
 
     private int id;
@@ -72,20 +79,31 @@ public class Cinema {
         return filmes;
     }
 
-    public List<Usuario> getUsuarios(){
+    public List<Usuario> getUsuarios() {
         return usuarios;
     }
-    
+
     // Set
     private void incrementaEntrada_id() {
         entrada_id += 1;
     }
 
+    /**
+     * Inclui uma entrada na lista de entradas do cinema, e incrementa o contador de
+     * entradas .
+     *
+     * @param entrada Objeto da classe Entrada
+     */
     public void incluirEntrada(Entrada entrada) {
         entradas.add(entrada);
         incrementaEntrada_id();
     }
 
+    /**
+     * Exclui uma entrada da lista de entradas do cinema.
+     *
+     * @param entrada_id ID da entrada a ser excluída
+     */
     public void excluirEntrada(int entrada_id) {
         for (Entrada e : entradas) {
             if (e.getId() == entrada_id) {
