@@ -14,7 +14,6 @@ public class Poltrona {
     private int id;
     private char fileira;
     private int numero;
-    //private int entrada_id;
 
     public Poltrona(int id, char fileira, int numero) {
         this.id = id;
@@ -34,5 +33,4 @@ public class Poltrona {
     public int getNumero() {
         return numero;
     }
-
 }
