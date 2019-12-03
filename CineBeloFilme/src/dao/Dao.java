@@ -1,7 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ---------------------------------------------------------------------------------------
+ * Licença   : MIT - Copyright 2019 Viniciusalopes (Vovolinux) <suporte@vovolinux.com.br>
+ *             <https://opensource.org/licenses/MIT>
+ * ---------------------------------------------------------------------------------------
+ * Criado em : novembro de 2019
+ * ---------------------------------------------------------------------------------------
+ * Projeto   : Projeto Integrador - Cine ABC
+ * ---------------------------------------------------------------------------------------
+ * Alunos    : Gustavo Henrique Ribeiro Martins
+ *             Olair Soares de Almeida
+ *             Vinicius Araujo Lopes
+ * ---------------------------------------------------------------------------------------
+ * Finalidade: Base de Dados (Dao) e carga inicial.
+ * ---------------------------------------------------------------------------------------
  */
 package dao;
 
@@ -14,10 +25,6 @@ import model.Sala;
 import model.Sessao;
 import model.Usuario;
 
-/**
- *
- * @author vovostudio
- */
 public class Dao {
 
     // Atributos
@@ -54,7 +61,7 @@ public class Dao {
     }
 
     /**
-     * Inicializa valores
+     * Inicializa valores do sistema.
      */
     protected void setValoresIniciais() {
 
@@ -87,7 +94,7 @@ public class Dao {
     }
 
     /**
-     * Constrói lista de filmes
+     * Constrói lista de filmes.
      */
     protected void setFilmes() {
         filmes = new ArrayList();
@@ -103,7 +110,7 @@ public class Dao {
     }
 
     /**
-     * Constrói salas do cinema
+     * Constrói salas do cinema.
      */
     protected void setSalas() {
         int indice_filme = 0;
@@ -114,7 +121,7 @@ public class Dao {
     }
 
     /**
-     * Constrói sessoes para as salas
+     * Constrói sessoes para as salas.
      *
      * @param indice_filme Indice do próximo filme da lista
      * @return Lista de Sessões com poltronas vazias e filmes em cada sessão
@@ -128,7 +135,7 @@ public class Dao {
     }
 
     /**
-     * Constrói matriz de poltronas vazias
+     * Constrói matriz de poltronas vazias.
      *
      * @return Matriz de poltronas vazias
      */
@@ -143,6 +150,4 @@ public class Dao {
         }
         return poltronas;
     }
-
-    
 }
