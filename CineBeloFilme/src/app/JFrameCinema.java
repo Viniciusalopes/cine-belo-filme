@@ -1,7 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * ---------------------------------------------------------------------------------------
+ * Licença   : MIT - Copyright 2019 Viniciusalopes (Vovolinux) <suporte@vovolinux.com.br>
+ *             <https://opensource.org/licenses/MIT>
+ * ---------------------------------------------------------------------------------------
+ * Criado em : novembro de 2019
+ * ---------------------------------------------------------------------------------------
+ * Projeto   : Projeto Integrador - Cine ABC
+ * ---------------------------------------------------------------------------------------
+ * Alunos    : Gustavo Henrique Ribeiro Martins
+ *             Olair Soares de Almeida
+ *             Vinicius Araujo Lopes
+ * ---------------------------------------------------------------------------------------
+ * Finalidade: Tela principal com seleção de filmes, poltronas e relatório.
+ * ---------------------------------------------------------------------------------------
  */
 package app;
 
@@ -10,7 +21,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JButton;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -30,12 +40,9 @@ import model.Sessao;
 import model.Usuario;
 import util.CaminhoAbsoluto;
 
-/**
- *
- * @author vovostudio
- */
 public class JFrameCinema extends javax.swing.JFrame {
 
+    // Variáveis
     private JToggleButton botao;
     private Bll bll;
     private List<Entrada> entradas;
@@ -69,6 +76,12 @@ public class JFrameCinema extends javax.swing.JFrame {
     }
 
     // VOVOLINUX -------------------------------------------------------------------------
+    /**
+     * Oculta painel de lugares e de detalhes do lugar, obtém textos de ajuda da bll.
+     *
+     * @param usuario Tipo do usuário: "cliente" ou "admin"
+     * @param bll Objeto da classe Bll com regras de negócio e dados do cinema
+     */
     private void setValoresIniciais(Usuario usuario, Bll bll) {
         this.bll = bll;
         this.usuario = usuario;
@@ -92,6 +105,9 @@ public class JFrameCinema extends javax.swing.JFrame {
         setFonteUbuntu();
     }
 
+    /**
+     * Registra a fonte Ubunto Mono Bold, utilizada nos botões de poltronas.
+     */
     private void setFonteUbuntu() {
         try {
             this.localFonteUbuntu = CaminhoAbsoluto.getLocalAbsoluto().split("\n")[0] + "/src/app/UbuntuMono-B.ttf";
@@ -106,6 +122,10 @@ public class JFrameCinema extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Oculta a tab de relatórios para usuário do tipo "cliente" e muda o texto do botão
+     * de Vender para Comprar.
+     */
     private void setAmbiente() {
         if (this.usuario.getTipo().equals("cliente")) {
             this.jTabbedPane.removeTabAt(1);
@@ -113,6 +133,7 @@ public class JFrameCinema extends javax.swing.JFrame {
         }
     }
 
+    // Get e Set
     public Usuario getUsuario() {
         return usuario;
     }
@@ -121,9 +142,15 @@ public class JFrameCinema extends javax.swing.JFrame {
         this.usuario = usuario;
     }
 
+    /**
+     * Atualiza o painel de salas com os nomes das salas, das sessões e dos filmes;
+     *
+     * Inclui evento nos botões por id do filme.
+     */
     private void setBotoesSalas() {
         List<Sala> salas = bll.getSalas();
 
+        // Salas e Sessões
         Sala sala = salas.get(0);
         this.jLabelSala0.setText("Sala " + sala.getNome());
         this.jLabelSessao00.setText(sala.getSessoes().get(0).getPeriodo());
@@ -142,6 +169,7 @@ public class JFrameCinema extends javax.swing.JFrame {
         this.jLabelSessao21.setText(sala.getSessoes().get(1).getPeriodo());
         this.jLabelSessao22.setText(sala.getSessoes().get(2).getPeriodo());
 
+        // Filmes
         List<Filme> filmes = bll.getFilmes();
         this.jToggleButtonFilme00.setText(filmes.get(0).getTitulo());
         this.jToggleButtonFilme00.addActionListener(getActionListenerButtonFilme(filmes.get(0).getId()));
@@ -163,18 +191,25 @@ public class JFrameCinema extends javax.swing.JFrame {
         this.jToggleButtonFilme22.addActionListener(getActionListenerButtonFilme(filmes.get(8).getId()));
     }
 
+    /**
+     * Atualiza os botões das poltronas da sessão do filme e ocupa as poltronas vendidas.
+     *
+     * @param filme_id Filme selecionado.
+     */
     private void setBotoesPoltronas(int filme_id) {
+        // Variáves
         this.filme_id = filme_id;
         Poltrona[][] poltronas = bll.getPoltronas(filme_id);
         this.entradas = bll.getEntradas();
+        int poltrona_id;
 
+        // Atualiza o texto de ajuda para usuário-cliente
         if (this.usuario.getTipo().equals("cliente")) {
             this.jLabelLegendaII.setText(this.txtAjudaOO);
             this.jLabelLegendaMM.setText(this.txtAjudaSS);
         }
 
-        int poltrona_id;
-
+        // Libera todas as poltronas da sessão
         for (int i = 0; i < poltronas.length; i++) {
             for (int j = 0; j < poltronas[i].length; j++) {
                 poltrona_id = poltronas[i][j].getId();
@@ -191,6 +226,7 @@ public class JFrameCinema extends javax.swing.JFrame {
             }
         }
 
+        // Ocupa as poltronas vendidas
         for (Entrada e : entradas) {
             if (e.getFilme_id() == filme_id) {
                 poltrona_id = e.getPoltrona_id();
@@ -222,7 +258,14 @@ public class JFrameCinema extends javax.swing.JFrame {
         atualizaLugar(poltrona_id, botao);
     }
 
+    /**
+     * Atualiza os detalhes da poltrona selecionada, no filme selecionado.
+     *
+     * @param poltrona_id ID da poltrona selecionada
+     * @param filme_id ID do filme Selecionado
+     */
     private void setDetalhes(int poltrona_id, int filme_id) {
+        // Variáveis
         this.poltrona_id = poltrona_id;
         this.filme_id = filme_id;
         this.sessao_id = bll.getSessaoDoFilme(filme_id).getId();
@@ -233,6 +276,7 @@ public class JFrameCinema extends javax.swing.JFrame {
 
         String label = bll.getLabelPoltrona_id(poltrona_id, filme_id);
 
+        // Busca a poltrona selecionada na lista de entradas
         for (Entrada e : entradas) {
             if (e.getPoltrona_id() == poltrona_id
                     && e.getFilme_id() == filme_id) {
@@ -244,6 +288,7 @@ public class JFrameCinema extends javax.swing.JFrame {
             }
         }
 
+        // Botões e texto de ajuda
         if (livre) {
             this.jLabelStatus.setForeground(Color.blue);
             this.jLabelStatus.setText(String.format(this.txtDisponivel, label));
@@ -291,6 +336,12 @@ public class JFrameCinema extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Atualiza os detalhes da poltrona selecionada, no filme selecionado.
+     *
+     * @param poltrona_id ID da poltrona selecionada
+     * @param filme_id ID do filme Selecionado
+     */
     private void exibeDetalhesPoltrona(int poltrona_id, int filme_id) {
         if (!jPanelDetalhes.isVisible()) {
             jPanelDetalhes.setVisible(true);
@@ -298,6 +349,11 @@ public class JFrameCinema extends javax.swing.JFrame {
         setDetalhes(poltrona_id, filme_id);
     }
 
+    /**
+     * Exibe as poltronas do filme selecionado.
+     *
+     * @param filme_id ID do filme selecionado
+     */
     private void exibePoltronas(int filme_id) {
         if (!jPanelLugares.isVisible()) {
             jPanelLugares.setVisible(true);
@@ -306,6 +362,9 @@ public class JFrameCinema extends javax.swing.JFrame {
         this.jPanelDetalhes.setVisible(false);
     }
 
+    /**
+     * Preenche a jTable com a matriz dos dados do relatório.
+     */
     private void preencheTabela() {
         String[][] relatorio = bll.getRelatorio();
         if (relatorio != null) {
@@ -318,6 +377,11 @@ public class JFrameCinema extends javax.swing.JFrame {
         setLabelsTotal(relatorio);
     }
 
+    /**
+     * Atualiza os valores de totais do relatório.
+     *
+     * @param relatorio
+     */
     private void setLabelsTotal(String[][] relatorio) {
         this.jLabelTotalMeia.setText(String.format(
                 "R$ %.2f (%s unidades)",
@@ -347,26 +411,37 @@ public class JFrameCinema extends javax.swing.JFrame {
         this.jLabelMaiorArrecadacao.setText(
                 getTxtLabelMaiorMenor(
                         relatorio[relatorio.length - 1][0], relatorio[relatorio.length - 1][1], "R$ %s"));
-        
+
         this.jLabelMenorArrecadacao.setText(
                 getTxtLabelMaiorMenor(
                         relatorio[relatorio.length - 1][2], relatorio[relatorio.length - 1][3], "R$ %s"));
-        
+
         this.jLabelMaiorBilheteria.setText(
                 getTxtLabelMaiorMenor(
                         relatorio[relatorio.length - 1][4], relatorio[relatorio.length - 1][5], "%s unidades"));
-        
+
         this.jLabelMenorBilheteria.setText(
                 getTxtLabelMaiorMenor(
                         relatorio[relatorio.length - 1][6], relatorio[relatorio.length - 1][7], "%s unidades"));
     }
 
+    /**
+     * Formata o texto de total com o nome do filme e o formato (unidades ou reais).
+     *
+     * @param id ID do filme
+     * @param valor Valor a ser formatado
+     * @param formato Reais: "R$ %s", Unidades: "%s unidades"
+     * @return Nome do filme com o valor formatado
+     */
     private String getTxtLabelMaiorMenor(String id, String valor, String formato) {
         int filme_id = Integer.parseInt(id);
         String titulo = bll.getFilme(filme_id).getTitulo();
         return String.format("%04d - %s, com " + formato, filme_id, titulo, valor);
     }
 
+    /**
+     * Corrige alinhamento das colunas da tabela de relatório.
+     */
     private void formataTabela() {
 
         /**
@@ -393,6 +468,9 @@ public class JFrameCinema extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Calcula o preço e atualiza o jLabel com o valor.
+     */
     private void atualizaLabelPreco() {
         this.meia = this.jRadioButtonMeia.isSelected();
         this.jLabelPreco.setVisible(true);
@@ -406,6 +484,10 @@ public class JFrameCinema extends javax.swing.JFrame {
         );
     }
 
+    /**
+     * Realiza a venda do ingresso, solicita o cpf do cliente e oferece a impressão do
+     * ingresso.
+     */
     private void venderIngresso() {
         String cpf = "";
         String operacao = (this.usuario.getTipo().equals("cliente")) ? "compra" : "venda";
@@ -437,6 +519,9 @@ public class JFrameCinema extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Impressão do ingresso na tela.
+     */
     private void verIngresso() {
         Entrada e = bll.getEntrada(this.entrada_id);
         Filme f = bll.getFilme(e.getFilme_id());
@@ -455,6 +540,9 @@ public class JFrameCinema extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, texto);
     }
 
+    /**
+     * Realiza a devolução do ingresso e disponibiliza novamente a poltrona.
+     */
     private void devolverIngresso() {
         if (JOptionPane.showConfirmDialog(null, "Confirma a devolução?", "Confirmação:", 0) == 0) {
             bll.excluirEntrada(this.entrada_id);
@@ -463,31 +551,12 @@ public class JFrameCinema extends javax.swing.JFrame {
         }
     }
 
-    // Eventos
-    private void jToggleButtonActionPerformedButtonPoltrona(int poltrona_id, int filme_id) {
-        exibeDetalhesPoltrona(poltrona_id, filme_id);
-    }
-
-    private ActionListener getActionListenerButtonPoltrona(int poltrona_id, int filme_id) {
-        return new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                jToggleButtonActionPerformedButtonPoltrona(poltrona_id, filme_id);
-            }
-        };
-    }
-
-    private void jToogleButtonFilmeActionPerformedButtonFilme(int filme_id) {
-        exibePoltronas(filme_id);
-    }
-
-    private ActionListener getActionListenerButtonFilme(int filme_id) {
-        return new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                jToogleButtonFilmeActionPerformedButtonFilme(filme_id);
-            }
-        };
-    }
-
+    /**
+     * Obtém o botão no estado atual.
+     *
+     * @param poltrona_id ID da poltrona correspondente ao botão
+     * @return Objeto JToggleButton no estado atual.
+     */
     private JToggleButton getBotao(int poltrona_id) {
 
         switch (poltrona_id) {
@@ -796,6 +865,12 @@ public class JFrameCinema extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Atualiza o botão com novas informações sobre a ocupação da poltrona correspondente.
+     *
+     * @param poltrona_id ID da poltrona correspondente ao botão
+     * @param botao Novo botão
+     */
     private void atualizaLugar(int poltrona_id, JToggleButton botao) {
 
         switch (poltrona_id) {
@@ -1104,6 +1179,57 @@ public class JFrameCinema extends javax.swing.JFrame {
         }
     }
 
+    // Eventos ---------------------------------------------------------------------------
+    /**
+     * Exibe os detalhes da poltrona selecionada.
+     *
+     * @param poltrona_id ID da poltrona selecionada
+     * @param filme_id ID do filme selecionado
+     */
+    private void jToggleButtonActionPerformedButtonPoltrona(int poltrona_id, int filme_id) {
+        exibeDetalhesPoltrona(poltrona_id, filme_id);
+    }
+
+    /**
+     * Retorna um ActionListener para os botões de poltronas.
+     *
+     * @param poltrona_id ID da poltrona correspondente ao botão
+     * @param filme_id ID do filme selecionado
+     * @return Listener com id da poltrona e do filme
+     */
+    private ActionListener getActionListenerButtonPoltrona(int poltrona_id, int filme_id) {
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                jToggleButtonActionPerformedButtonPoltrona(poltrona_id, filme_id);
+            }
+        };
+    }
+
+    /**
+     * Exibe os botões das poltronas para o filme selecionado.
+     *
+     * @param filme_id ID do filme selecionado
+     */
+    private void jToogleButtonFilmeActionPerformedButtonFilme(int filme_id) {
+        exibePoltronas(filme_id);
+    }
+
+    /**
+     * Retorna um AcionListener para os botões de filmes
+     *
+     * @param filme_id ID do filme correspondente ao botão
+     * @return Listener com o id do filme
+     */
+    private ActionListener getActionListenerButtonFilme(int filme_id) {
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                jToogleButtonFilmeActionPerformedButtonFilme(filme_id);
+            }
+        };
+    }
+
+    // Fim Eventos -----------------------------------------------------------------------
+    //
     // VOVOLINUX -------------------------------------------------------------------------
     //
     //

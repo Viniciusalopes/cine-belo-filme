@@ -18,10 +18,6 @@ package app;
 
 import bll.Bll;
 
-/**
- *
- * @author vovostudio
- */
 public class JFrameAcesso extends javax.swing.JFrame {
 
     private Bll bll;
@@ -31,12 +27,12 @@ public class JFrameAcesso extends javax.swing.JFrame {
      */
     public JFrameAcesso(Bll bll) {
         initComponents();
-        // Cria uma nova instância da bll ou atualiza com a bll passada por parâmetro
+        // Cria uma nova instância da bll ou atualiza com a bll passada por parâmetro.
         this.bll = (bll == null) ? new Bll() : bll;
     }
 
     /**
-     * Executa o frameCpf para autenticação
+     * Executa o frameCpf para autenticação.
      *
      * @param tipo "cliente": exibe campo para cpf; "admin": exibe campo para senha;
      */
