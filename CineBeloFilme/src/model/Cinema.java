@@ -43,7 +43,6 @@ public class Cinema {
         this.entradas = new ArrayList();
         this.filmes = filmes;
         this.usuarios = usuarios;
-
     }
 
     // Get
