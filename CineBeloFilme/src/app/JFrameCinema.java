@@ -106,7 +106,7 @@ public class JFrameCinema extends javax.swing.JFrame {
     }
 
     /**
-     * Registra a fonte Ubunto Mono Bold, utilizada nos botões de poltronas.
+     * Registra a fonte Ubuntu Mono Bold, utilizada nos botões de poltronas.
      */
     private void setFonteUbuntu() {
         try {
