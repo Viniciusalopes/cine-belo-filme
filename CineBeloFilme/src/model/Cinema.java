@@ -15,7 +15,7 @@ import java.util.List;
 public class Cinema {
 
     private int id;
-    private String Nome;
+    private String nome;
     private List<Sala> salas;
     private int entrada_id;
     private double preco_entrada;
@@ -24,11 +24,11 @@ public class Cinema {
     private List<Filme> filmes;
     private List<Usuario> usuarios;
 
-    public Cinema(int id, String Nome, List<Sala> salas,
+    public Cinema(int id, String nome, List<Sala> salas,
             int entrada_id, double preco_entrada, int ocupacao_inicial, List<Filme> filmes,
             List<Usuario> usuarios) {
         this.id = id;
-        this.Nome = Nome;
+        this.nome = nome;
         this.salas = salas;
         this.entrada_id = entrada_id;
         this.preco_entrada = preco_entrada;
@@ -45,7 +45,7 @@ public class Cinema {
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public List<Sala> getSalas() {
