@@ -21,6 +21,7 @@ import java.util.List;
 
 public class Cinema {
 
+    // Atributos
     private int id;
     private String nome;
     private List<Sala> salas;
@@ -31,6 +32,7 @@ public class Cinema {
     private List<Filme> filmes;
     private List<Usuario> usuarios;
 
+    // Construtor
     public Cinema(int id, String nome, List<Sala> salas,
             int entrada_id, double preco_entrada, int ocupacao_inicial, List<Filme> filmes,
             List<Usuario> usuarios) {
